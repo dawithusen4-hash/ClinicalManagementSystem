@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Med-Flow Clinic | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modernized Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        /* Consistent Background for the entire application */
+        body { 
+            background-color: #f0f4f8; /* Light professional blue-grey */
+            color: #2d3436; 
+            overflow-x: hidden; 
+        }
+        
+        /* Navigation */
+        nav { 
+            background: rgba(44, 62, 80, 0.95); 
+            backdrop-filter: blur(10px);
+            color: white; 
+            padding: 10px 60px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+        nav .brand-container { display: flex; align-items: center; gap: 15px; }
+        nav .nav-logo { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #3498db; }
+        nav .logo-text { font-size: 22px; font-weight: 700; letter-spacing: 1.5px; color: #3498db; }
+        
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { 
+            color: #ecf0f1; 
+            text-decoration: none; 
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        nav ul li a:hover { color: #3498db; }
+
+        /* Page Layout */
+        .page-section { 
+            display: none; 
+            padding: 80px 10%; 
+            text-align: center; 
+            min-height: 90vh; 
+        }
+        .active { display: flex !important; flex-direction: column; justify-content: center; align-items: center; }
+
+        /* Home Section */
+        #home { 
+            color: #2d3436; 
+        }
+        .hero-logo { 
+            width: 110px; 
+            height: 110px; 
+            margin-bottom: 20px; 
+            border-radius: 50%; 
+            background: white; 
+            padding: 5px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        #home h1 { font-size: 3rem; font-weight: 700; margin-bottom: 10px; color: #2c3e50; }
+        
+        /* Stylized Greeting & Real-time Clock Sub-container */
+        .header-meta-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .time-greeting {
+            color: #3498db;
+        }
+        .live-clock {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 2px 14px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: monospace;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .home-desc { max-width: 800px; line-height: 1.6; font-size: 1.1rem; margin-bottom: 30px; color: #636e72; }
+        
+        .home-features { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        .feature-tag { 
+            background: white; 
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            font-size: 0.9rem; 
+            border: 1px solid #dcdde1;
+            color: #3498db;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Help Section Content */
+        .help-container { text-align: left; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 900px; }
+        .help-card { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .help-card h3 { color: #3498db; margin-bottom: 10px; }
+        .help-card p { color: #636e72; line-height: 1.7; }
+
+        /* Portal Grid */
+        .login-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; max-width: 1200px; margin-top: 40px; width: 100%; }
+        .login-card { background: white; padding: 30px 20px; border-radius: 20px; text-decoration: none; color: inherit; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #e1e8ed; text-align: center; }
+        .login-card:hover { transform: translateY(-10px); border-color: #3498db; }
+        .login-card img { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+
+        /* Developer Box */
+        .dev-box { background: white; padding: 40px; max-width: 800px; border-radius: 25px; display: flex; align-items: center; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        footer { background: #2c3e50; color: #dfe6e9; padding: 30px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand-container">
+            <img src="images/logo.jpg" alt="Logo" class="nav-logo">
+            <div class="logo-text">MATTU UNIVERSITY</div>
+        </div>
+        <ul>
+            <li><a onclick="showSection('home')">Home</a></li>
+            <li><a onclick="showSection('login')">Portals</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a onclick="showSection('developer')">Developer</a></li>
+            <li><a onclick="showSection('help')">Help</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="page-section active">
+        <img src="images/logo.jpg" alt="Clinic Logo" class="hero-logo">
+        
+        <div class="header-meta-row">
+            <span id="greetingField" class="time-greeting">Welcome,</span>
+            <span id="clockField" class="live-clock">00:00:00 AM</span>
+        </div>
+        <h1>Med-Flow Management System</h1>
+        
+        <p class="home-desc">
+            Welcome to Mattu University's Advanced Clinic Portal. Our platform bridges the gap between medical expertise and digital efficiency. We provide a centralized ecosystem where patient records, diagnostic data, and pharmaceutical supplies are managed in real-time.
+        </p>
+        <div class="home-features">
+            <span class="feature-tag">✔ Real-time Tracking</span>
+            <span class="feature-tag">✔ Secure Health Records</span>
+            <span class="feature-tag">✔ Automated Lab Sync</span>
+            <span class="feature-tag">✔ Pharmacy Inventory</span>
+        </div>
+    </section>
+
+    <section id="help" class="page-section">
+        <h2 style="margin-bottom: 30px; font-size: 2.2rem; color: #2c3e50;">System Support</h2>
+        <div class="help-container">
+            <div class="help-card">
+                <h3>1. Getting Started</h3>
+                <p>Use your university-issued credentials to log in. Ensure your role matches your department to see the correct tools.</p>
+            </div>
+            <div class="help-card">
+                <h3>2. Patient Flow</h3>
+                <p>Data moves from <b>Reception</b> to the <b>Doctor</b>, then to the <b>Lab</b> or <b>Pharmacy</b> instantly. There is no need for paper transfers.</p>
+            </div>
+            <div class="help-card">
+                <h3>3. Technical Support</h3>
+                <p>For account resets or hardware issues, contact the IT department on the main campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="login" class="page-section">
+        <h2 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px;">Department Portals</h2>
+        <div class="login-grid">
+            <a href="login.html" class="login-card"><img src="images/admin.png"><h3>System Admin</h3></a>
+            <a href="login.html" class="login-card"><img src="images/receptionist.jpg"><h3>Receptionist</h3></a>
+            <a href="login.html" class="login-card"><img src="images/doctor.jpg"><h3>Doctor</h3></a>
+            <a href="login.html" class="login-card"><img src="images/lab.png"><h3>Laboratory</h3></a>
+            <a href="login.html" class="login-card"><img src="images/pharmacist.png"><h3>Pharmacy</h3></a>
+        </div>
+    </section>
+
+    <section id="developer" class="page-section">
+        <h2 style="margin-bottom: 40px; color: #2c3e50;">Project Developer</h2>
+        <div class="dev-box">
+            <img src="images/admin.png" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 30px; border: 4px solid #f0f4f8;">
+            <div>
+                <h3>Mihiret Melak</h3>
+                <p style="color: #3498db; font-weight: 600;">IT 3rd Year Student</p>
+                <p>Engineering seamless Medical Information Systems for modern hospitals.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 <strong>Med-Flow Clinic Management</strong></p>
+    </footer>
+
+    <script>
+        // Tab display controller mechanism
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // TIME-BASED GREETING & RUNTIME CLOCK ENGINE
+        function runTimeEngine() {
+            const now = new Date();
+            const hour = now.getHours();
+            
+            // 1. Calculate Greeting
+            let greetingString = "Good Evening,";
+            if (hour >= 5 && hour < 12) {
+                greetingString = "Good Morning,";
+            } else if (hour >= 12 && hour < 17) {
+                greetingString = "Good Afternoon,";
+            }
+            document.getElementById("greetingField").innerText = greetingString;
+
+            // 2. Format & Display Live Clock (12-Hour format with AM/PM)
+            let hours12 = hour % 12;
+            hours12 = hours12 ? hours12 : 12; // convert '0' hours to '12'
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            
+            const timeString = `${hours12}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById("clockField").innerText = timeString;
+        }
+
+        // Trigger loop cycle immediately on load and sync every 1 second (1000ms)
+        window.onload = function() {
+            runTimeEngine();
+            setInterval(runTimeEngine, 1000);
+        };
+    </script>
+
+</body>
+</html>

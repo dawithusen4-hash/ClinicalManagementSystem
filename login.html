@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clinic System | Login</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        .logo-container img { width: 100px; height: auto; margin-bottom: 15px; border-radius: 50%; }
+        .login-card h2 { color: #2c3e50; margin-bottom: 25px; margin-top: 0; }
+        
+        #error-banner {
+            display: none;
+            background-color: #fceaea;
+            color: #e74c3c;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #fababa;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        
+        /* New Container for Horizontal Buttons */
+        .button-group {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-top: 10px;
+        }
+
+        button { width: 100%; padding: 12px; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        
+        .btn-login { background-color: #3498db; }
+        .btn-login:hover { background-color: #2980b9; }
+        
+        .btn-clear { background-color: #e67e22; }
+        .btn-clear:hover { background-color: #d35400; }
+
+        .btn-back { display: block; text-align: center; width: 100%; padding: 10px; background-color: #95a5a6; color: white; text-decoration: none; border-radius: 5px; margin-top: 15px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="logo-container">
+        <img src="images/logo.jpg" alt="Clinic Logo">
+    </div>
+    <h2>Clinic Login</h2>
+
+    <div id="error-banner">✕ Invalid Username, Password, or Role</div>
+    
+    <form action="LoginServlet" method="post" onsubmit="return validateForm()">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <select name="role" id="role" required>
+            <option value="" disabled selected>Select Your Role</option>
+            <option value="admin">Admin</option>
+            <option value="receptionist">Receptionist</option>
+            <option value="doctor">Doctor</option>
+            <option value="lab_technician">Lab Technician</option>
+            <option value="pharmacist">Pharmacist</option>
+        </select>
+        
+        <div class="button-group">
+            <button type="submit" class="btn-login">Login</button>
+            <button type="reset" class="btn-clear">Clear</button>
+        </div>
+    </form>
+    <a href="index.html" class="btn-back">← Back to Home</a>
+</div>
+
+<script>
+    function validateForm() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        const banner = document.getElementById('error-banner');
+
+        if (user.trim() === "" || pass.trim() === "") {
+            banner.style.display = 'block';
+            banner.innerText = "✕ Case-sensitive fields cannot be empty";
+            return false;
+        }
+        return true; 
+    }
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            document.getElementById('error-banner').style.display = 'block';
+        }
+    };
+</script>
+
+</body>
+</html>
